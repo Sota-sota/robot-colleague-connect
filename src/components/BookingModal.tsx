@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, CheckCircle2, Clock, Calendar, Bot } from "lucide-react";
+import { X, CheckCircle2, Clock, Calendar, Bot, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { type MatchedRobot } from "@/data/robots";
 import { addDays, format } from "date-fns";
@@ -17,7 +17,8 @@ const BookingModal = ({ robot, detectedTasks, onClose }: BookingModalProps) => {
   const today = new Date();
   const startDate = addDays(today, robot.availableInDays);
   const endDate = addDays(startDate, 30);
-  const totalCost = hours * robot.hourlyRate;
+  const costPerUnit = hours * robot.hourlyRate;
+  const totalCost = costPerUnit * robot.quantity;
 
   if (confirmed) {
     return (
@@ -27,7 +28,7 @@ const BookingModal = ({ robot, detectedTasks, onClose }: BookingModalProps) => {
           <div className="space-y-2">
             <h2 className="font-heading font-bold text-2xl text-foreground">Booking Submitted!</h2>
             <p className="text-muted-foreground">
-              Your booking request for <span className="text-foreground font-semibold">{robot.name}</span> has been submitted! Our team will contact you within 24 hours.
+              Your booking for <span className="text-foreground font-semibold">{robot.quantity}× {robot.name}</span> has been submitted! Our team will contact you within 24 hours.
             </p>
           </div>
           <Button variant="hero" className="w-full" onClick={onClose}>
@@ -61,7 +62,10 @@ const BookingModal = ({ robot, detectedTasks, onClose }: BookingModalProps) => {
             </div>
             <div>
               <h3 className="font-heading font-bold text-lg text-foreground">{robot.name}</h3>
-              <p className="text-sm text-muted-foreground">{robot.description}</p>
+              <p className="text-xs text-muted-foreground">{robot.nameJa}</p>
+              <div className="flex items-center gap-2 mt-1">
+                <Badge quantity={robot.quantity} />
+              </div>
             </div>
           </div>
 
@@ -92,7 +96,7 @@ const BookingModal = ({ robot, detectedTasks, onClose }: BookingModalProps) => {
           {/* Hours & Cost */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-foreground">Estimated Hours</label>
+              <label className="text-sm font-medium text-foreground">Estimated Hours (per unit)</label>
               <span className="text-sm text-muted-foreground">${robot.hourlyRate}/hr</span>
             </div>
             <input
@@ -102,22 +106,40 @@ const BookingModal = ({ robot, detectedTasks, onClose }: BookingModalProps) => {
               min={1}
               className="w-full rounded-lg border border-input bg-background px-4 py-3 text-foreground font-heading font-bold text-lg focus:outline-none focus:ring-2 focus:ring-ring"
             />
-            <div className="flex items-center justify-between bg-secondary/50 rounded-lg p-4">
-              <span className="text-foreground font-medium">Estimated Total</span>
-              <span className="font-heading font-bold text-2xl text-primary">
-                ${totalCost.toLocaleString()}
-              </span>
+            
+            <div className="bg-secondary/50 rounded-lg p-4 space-y-2">
+              <div className="flex items-center justify-between text-sm text-muted-foreground">
+                <span>Per unit: {hours}hrs × ${robot.hourlyRate}/hr</span>
+                <span>${costPerUnit.toLocaleString()}</span>
+              </div>
+              <div className="flex items-center justify-between text-sm text-muted-foreground">
+                <span>Units: ×{robot.quantity}</span>
+              </div>
+              <div className="border-t border-border pt-2 flex items-center justify-between">
+                <span className="text-foreground font-medium">Estimated Total</span>
+                <span className="font-heading font-bold text-2xl text-primary">
+                  ${totalCost.toLocaleString()}
+                </span>
+              </div>
             </div>
           </div>
 
           {/* Confirm */}
           <Button variant="hero" size="lg" className="w-full h-14 text-lg" onClick={() => setConfirmed(true)}>
-            Confirm Booking
+            Confirm Booking ({robot.quantity} Unit{robot.quantity > 1 ? "s" : ""})
           </Button>
         </div>
       </div>
     </div>
   );
 };
+
+// Simple inline badge for quantity
+const Badge = ({ quantity }: { quantity: number }) => (
+  <span className="inline-flex items-center gap-1 text-xs font-medium bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+    <Users className="w-3 h-3" />
+    {quantity} unit{quantity > 1 ? "s" : ""}
+  </span>
+);
 
 export default BookingModal;
