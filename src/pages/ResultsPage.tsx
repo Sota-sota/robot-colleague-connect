@@ -127,8 +127,9 @@ const ResultsPage = () => {
                      <div className="aspect-video">
                        <iframe
                          src={robot.demoUrl.replace('/share/', '/embed/')}
-                         className="w-full h-full"
+                         className="w-full h-full rounded-t-lg"
                          frameBorder="0"
+                         allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                          allowFullScreen
                        />
                      </div>
