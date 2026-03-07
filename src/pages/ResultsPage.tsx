@@ -58,58 +58,58 @@ const ResultsPage = () => {
             <Bot className="w-7 h-7 text-primary" />
             <span className="font-heading font-bold text-lg text-foreground">RoboHire</span>
           </div>
-          <Button variant="ghost" onClick={() => navigate("/")} className="text-muted-foreground">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            新規依頼
-          </Button>
+           <Button variant="ghost" onClick={() => navigate("/")} className="text-muted-foreground">
+             <ArrowLeft className="w-4 h-4 mr-2" />
+             New Request
+           </Button>
         </div>
       </div>
 
       {/* AI Summary */}
       {detectedTasks.length > 0 && (
         <div className="container mx-auto px-4 mb-6">
-          <div className="bg-card border border-border rounded-lg p-5 shadow-card">
-            <div className="flex items-start gap-3">
-              <Zap className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-heading font-semibold text-foreground mb-2">AI分析完了 — 派遣チーム編成</p>
-                <p className="text-muted-foreground text-sm mb-3">
-                  検出されたタスク：{" "}
-                  {detectedTasks.map((task, i) => (
-                    <Badge key={i} variant="secondary" className="mr-1.5 mb-1">
-                      {task}
-                    </Badge>
-                  ))}
-                </p>
-              </div>
-            </div>
-          </div>
+           <div className="bg-card border border-border rounded-lg p-5 shadow-card">
+             <div className="flex items-start gap-3">
+               <Zap className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+               <div>
+                 <p className="font-heading font-semibold text-foreground mb-2">AI Analysis Complete — Dispatch Team Organized</p>
+                 <p className="text-muted-foreground text-sm mb-3">
+                   Detected Tasks:{" "}
+                   {detectedTasks.map((task, i) => (
+                     <Badge key={i} variant="secondary" className="mr-1.5 mb-1">
+                       {task}
+                     </Badge>
+                   ))}
+                 </p>
+               </div>
+             </div>
+           </div>
         </div>
       )}
 
-      {/* Summary Stats */}
-      <div className="container mx-auto px-4 mb-8">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="bg-card border border-border rounded-lg p-4 text-center shadow-card">
-            <p className="text-muted-foreground text-xs mb-1">ロボット種別</p>
-            <p className="font-heading font-bold text-2xl text-foreground">{matchedRobots.length}</p>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-4 text-center shadow-card">
-            <p className="text-muted-foreground text-xs mb-1">派遣台数</p>
-            <p className="font-heading font-bold text-2xl text-primary">{totalRobots}</p>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-4 text-center shadow-card">
-            <p className="text-muted-foreground text-xs mb-1">合計時給</p>
-            <p className="font-heading font-bold text-2xl text-primary">${totalHourlyCost}</p>
-          </div>
-        </div>
-      </div>
+       {/* Summary Stats */}
+       <div className="container mx-auto px-4 mb-8">
+         <div className="grid grid-cols-3 gap-4">
+           <div className="bg-card border border-border rounded-lg p-4 text-center shadow-card">
+             <p className="text-muted-foreground text-xs mb-1">Robot Types</p>
+             <p className="font-heading font-bold text-2xl text-foreground">{matchedRobots.length}</p>
+           </div>
+           <div className="bg-card border border-border rounded-lg p-4 text-center shadow-card">
+             <p className="text-muted-foreground text-xs mb-1">Total Units</p>
+             <p className="font-heading font-bold text-2xl text-primary">{totalRobots}</p>
+           </div>
+           <div className="bg-card border border-border rounded-lg p-4 text-center shadow-card">
+             <p className="text-muted-foreground text-xs mb-1">Total $/hr</p>
+             <p className="font-heading font-bold text-2xl text-primary">${totalHourlyCost}</p>
+           </div>
+         </div>
+       </div>
 
-      {/* Results Grid */}
-      <div className="container mx-auto px-4 pb-20">
-        <h2 className="font-heading font-bold text-2xl text-foreground mb-6">
-          派遣ロボットチーム
-        </h2>
+       {/* Results Grid */}
+       <div className="container mx-auto px-4 pb-20">
+         <h2 className="font-heading font-bold text-2xl text-foreground mb-6">
+           Dispatch Robot Team
+         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {matchedRobots.map((robot, index) => {
             const availDate = addDays(today, robot.availableInDays);
@@ -173,13 +173,13 @@ const ResultsPage = () => {
                     </div>
                   </div>
 
-                  <Button
-                    variant="hero"
-                    className="w-full"
-                    onClick={() => setSelectedRobot(robot)}
-                  >
-                    {robot.quantity}台を派遣依頼
-                  </Button>
+                   <Button
+                     variant="hero"
+                     className="w-full"
+                     onClick={() => setSelectedRobot(robot)}
+                   >
+                     Request {robot.quantity} Unit{robot.quantity > 1 ? 's' : ''}
+                   </Button>
                 </div>
               </div>
             );

@@ -21,33 +21,33 @@ const BookingModal = ({ robot, detectedTasks, onClose }: BookingModalProps) => {
   const totalCost = costPerUnit * robot.quantity;
 
   if (confirmed) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
-        <div className="bg-card border border-border rounded-xl p-8 max-w-md w-full shadow-card animate-slide-up text-center space-y-6">
-          <CheckCircle2 className="w-16 h-16 text-success mx-auto" />
-          <div className="space-y-2">
-            <h2 className="font-heading font-bold text-2xl text-foreground">派遣依頼を受付しました！</h2>
-            <p className="text-muted-foreground">
-              <span className="text-foreground font-semibold">{robot.quantity}× {robot.name}</span> の派遣依頼を受け付けました。24時間以内に担当者よりご連絡いたします。
-            </p>
-          </div>
-          <Button variant="hero" className="w-full" onClick={onClose}>
-            閉じる
-          </Button>
-        </div>
-      </div>
-    );
-  }
+     return (
+       <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
+         <div className="bg-card border border-border rounded-xl p-8 max-w-md w-full shadow-card animate-slide-up text-center space-y-6">
+           <CheckCircle2 className="w-16 h-16 text-success mx-auto" />
+           <div className="space-y-2">
+             <h2 className="font-heading font-bold text-2xl text-foreground">Dispatch request confirmed!</h2>
+             <p className="text-muted-foreground">
+               Your dispatch request for <span className="text-foreground font-semibold">{robot.quantity}× {robot.name}</span> has been confirmed. Our team will contact you within 24 hours.
+             </p>
+           </div>
+           <Button variant="hero" className="w-full" onClick={onClose}>
+             Close
+           </Button>
+         </div>
+       </div>
+     );
+   }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm p-4">
       <div className="bg-card border border-border rounded-xl max-w-lg w-full shadow-card animate-slide-up max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-border">
-          <div className="flex items-center gap-3">
-            <Bot className="w-6 h-6 text-primary" />
-            <h2 className="font-heading font-bold text-xl text-foreground">派遣内容の確認</h2>
-          </div>
+         <div className="flex items-center justify-between p-6 border-b border-border">
+           <div className="flex items-center gap-3">
+             <Bot className="w-6 h-6 text-primary" />
+             <h2 className="font-heading font-bold text-xl text-foreground">Confirm Dispatch</h2>
+           </div>
           <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
             <X className="w-5 h-5" />
           </button>
@@ -69,36 +69,36 @@ const BookingModal = ({ robot, detectedTasks, onClose }: BookingModalProps) => {
             </div>
           </div>
 
-          {/* Task Summary */}
-          {detectedTasks.length > 0 && (
-            <div className="space-y-2">
-              <p className="text-sm font-medium text-foreground">作業内容</p>
-              <p className="text-sm text-muted-foreground">{detectedTasks.join(", ")}</p>
-            </div>
-          )}
+           {/* Task Summary */}
+           {detectedTasks.length > 0 && (
+             <div className="space-y-2">
+               <p className="text-sm font-medium text-foreground">Job Scope</p>
+               <p className="text-sm text-muted-foreground">{detectedTasks.join(", ")}</p>
+             </div>
+           )}
 
-          {/* Dates */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-secondary/50 rounded-lg p-3 space-y-1">
-              <div className="flex items-center gap-2 text-muted-foreground text-xs">
-                <Calendar className="w-3.5 h-3.5" /> 派遣開始日
-              </div>
-              <p className="font-heading font-semibold text-foreground">{format(startDate, "MMM d, yyyy")}</p>
-            </div>
-            <div className="bg-secondary/50 rounded-lg p-3 space-y-1">
-              <div className="flex items-center gap-2 text-muted-foreground text-xs">
-                <Clock className="w-3.5 h-3.5" /> 派遣期間
-              </div>
-              <p className="font-heading font-semibold text-foreground">{robot.deploymentDuration}</p>
-            </div>
-          </div>
+           {/* Dates */}
+           <div className="grid grid-cols-2 gap-4">
+             <div className="bg-secondary/50 rounded-lg p-3 space-y-1">
+               <div className="flex items-center gap-2 text-muted-foreground text-xs">
+                 <Calendar className="w-3.5 h-3.5" /> Dispatch Start Date
+               </div>
+               <p className="font-heading font-semibold text-foreground">{format(startDate, "MMM d, yyyy")}</p>
+             </div>
+             <div className="bg-secondary/50 rounded-lg p-3 space-y-1">
+               <div className="flex items-center gap-2 text-muted-foreground text-xs">
+                 <Clock className="w-3.5 h-3.5" /> Deployment Duration
+               </div>
+               <p className="font-heading font-semibold text-foreground">{robot.deploymentDuration}</p>
+             </div>
+           </div>
 
-          {/* Hours & Cost */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-foreground">稼働時間（1台あたり）</label>
-              <span className="text-sm text-muted-foreground">${robot.hourlyRate}/hr</span>
-            </div>
+           {/* Hours & Cost */}
+           <div className="space-y-3">
+             <div className="flex items-center justify-between">
+               <label className="text-sm font-medium text-foreground">Operating Hours (per unit)</label>
+               <span className="text-sm text-muted-foreground">${robot.hourlyRate}/hr</span>
+             </div>
             <input
               type="number"
               value={hours}
@@ -115,19 +115,19 @@ const BookingModal = ({ robot, detectedTasks, onClose }: BookingModalProps) => {
               <div className="flex items-center justify-between text-sm text-muted-foreground">
                 <span>Units: ×{robot.quantity}</span>
               </div>
-              <div className="border-t border-border pt-2 flex items-center justify-between">
-                <span className="text-foreground font-medium">見積もり合計</span>
-                <span className="font-heading font-bold text-2xl text-primary">
-                  ${totalCost.toLocaleString()}
-                </span>
-              </div>
+               <div className="border-t border-border pt-2 flex items-center justify-between">
+                 <span className="text-foreground font-medium">Estimated Total</span>
+                 <span className="font-heading font-bold text-2xl text-primary">
+                   ${totalCost.toLocaleString()}
+                 </span>
+               </div>
             </div>
           </div>
 
-          {/* Confirm */}
-          <Button variant="hero" size="lg" className="w-full h-14 text-lg" onClick={() => setConfirmed(true)}>
-            {robot.quantity}台の派遣を確定する
-          </Button>
+           {/* Confirm */}
+           <Button variant="hero" size="lg" className="w-full h-14 text-lg" onClick={() => setConfirmed(true)}>
+             Confirm {robot.quantity} Unit{robot.quantity > 1 ? 's' : ''} Dispatch
+           </Button>
         </div>
       </div>
     </div>
