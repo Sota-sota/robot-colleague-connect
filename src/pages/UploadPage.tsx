@@ -76,8 +76,8 @@ const UploadPage = () => {
           <Bot className="w-16 h-16 text-primary animate-pulse-glow" />
         </div>
         <div className="text-center space-y-2">
-          <h2 className="text-2xl font-heading font-bold text-foreground">Analyzing your job scope...</h2>
-          <p className="text-muted-foreground">Our AI is matching the best robots for your project</p>
+          <h2 className="text-2xl font-heading font-bold text-foreground">派遣チームを編成中...</h2>
+          <p className="text-muted-foreground">AIがあなたの現場に最適なロボットを選定しています</p>
         </div>
         <div className="flex gap-2">
           {[0, 1, 2].map((i) => (
@@ -110,11 +110,11 @@ const UploadPage = () => {
 
           <div className="max-w-3xl mx-auto text-center space-y-4 py-12">
             <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground leading-tight">
-              Find the Right Robot for{" "}
-              <span className="text-gradient-orange">Your Job Site</span>
+              現場に合ったロボットを{" "}
+              <span className="text-gradient-orange">即日派遣</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Upload your blueprints and job scope — we'll match the best robots available today.
+              設計図と作業内容をアップロード — AIが最適なロボットチームを編成し、すぐに派遣します。
             </p>
           </div>
         </div>
@@ -159,8 +159,8 @@ const UploadPage = () => {
               <div className="space-y-3">
                 <Upload className="w-10 h-10 text-muted-foreground mx-auto" />
                 <div>
-                  <p className="font-medium text-foreground">Upload Blueprint (PDF or Image)</p>
-                  <p className="text-sm text-muted-foreground">Drag and drop or click to browse</p>
+                  <p className="font-medium text-foreground">設計図をアップロード（PDF・画像）</p>
+                  <p className="text-sm text-muted-foreground">ドラッグ＆ドロップまたはクリックして選択</p>
                 </div>
               </div>
             )}
@@ -168,11 +168,11 @@ const UploadPage = () => {
 
           {/* Task Description */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">Describe your current tasks</label>
+            <label className="text-sm font-medium text-foreground">現場の作業内容を入力</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="e.g., material transport, site inspection, scaffolding, ceiling drilling..."
+              placeholder="例：資材運搬、現場点検、足場組立、天井穿孔、塗装、解体..."
               rows={4}
               className="w-full rounded-lg border border-input bg-card px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
             />
@@ -187,7 +187,7 @@ const UploadPage = () => {
             disabled={!description.trim()}
           >
             <Bot className="w-5 h-5 mr-2" />
-            Find Available Robots
+            ロボットを派遣する
           </Button>
         </div>
       </div>
