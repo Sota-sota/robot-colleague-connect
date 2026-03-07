@@ -166,6 +166,26 @@ const UploadPage = () => {
             )}
           </div>
 
+          {/* Sample Blueprint Button */}
+          {!file && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                const sampleBlob = new Blob(
+                  ["[Sample Blueprint — 3-story residential interior renovation, 2500 sqft per floor, drywall, painting, scaffolding, demolition of existing walls]"],
+                  { type: "application/pdf" }
+                );
+                const sampleFile = new File([sampleBlob], "sample-blueprint.pdf", { type: "application/pdf" });
+                setFile(sampleFile);
+              }}
+              className="w-full text-sm text-muted-foreground hover:text-primary transition-colors py-2 flex items-center justify-center gap-2"
+            >
+              <FileText className="w-4 h-4" />
+              Don't have a blueprint? Use a sample
+            </button>
+          )}
+
            {/* Task Description */}
            <div className="space-y-2">
              <label className="text-sm font-medium text-foreground">Describe your job scope</label>
