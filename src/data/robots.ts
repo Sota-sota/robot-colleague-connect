@@ -23,6 +23,8 @@ export interface Robot {
   deploymentDuration: string;
   description: string;
   descriptionJa: string;
+  hasDemo?: boolean;
+  developmentStatus?: "in-development" | "demo-available";
 }
 
 export interface MatchedRobot extends Robot {
