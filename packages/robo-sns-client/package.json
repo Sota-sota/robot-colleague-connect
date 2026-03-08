@@ -1,0 +1,23 @@
+{
+  "name": "@robo-sns/client",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for robot agents to interact with the Robot SNS network",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["robot", "sns", "knowledge-sharing", "huggingface", "blockchain"],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  }
+}
